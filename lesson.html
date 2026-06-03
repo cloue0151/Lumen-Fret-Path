@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Lesson</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+/* THEME VARIABLES */
+
+:root{
+
+    --bg:#050505;
+    --text:white;
+
+    --sidebar:#0b0b0b;
+    --card:#0d0d0d;
+
+    --primary:#39ff14;
+
+    --border:rgba(57,255,20,0.4);
+
+    --subtext:#bdbdbd;
+
+    --progress-bg:#1f1f1f;
+
+    --shadow:0 0 20px rgba(57,255,20,0.2);
+}
+
+/* LIGHT MODE */
+
+body.light-mode{
+
+    --bg:#e6c7a2;
+    --text:#4b2d16;
+
+    --sidebar:#d7b38a;
+    --card:#f5e7d6;
+
+    --primary:#7a431d;
+
+    --border:rgba(122,67,29,0.4);
+
+    --subtext:#6d4b35;
+
+    --progress-bg:#d6b08b;
+
+    --shadow:none;
+}
+
+/* BODY */
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    display:flex;
+    min-height:100vh;
+    transition:0.4s;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    width:230px;
+    background:var(--sidebar);
+    border-right:2px solid var(--primary);
+    padding:25px 20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    box-shadow:var(--shadow);
+    transition:0.4s;
+}
+
+.logo img{
+    width:120px;
+    margin-bottom:40px;
+}
+
+/* MENU */
+
+.sidebar ul{
+    list-style:none;
+    width:100%;
+}
+
+.sidebar ul li{
+    margin:12px 0;
+}
+
+.sidebar ul li a{
+    display:block;
+    padding:15px;
+    border-radius:15px;
+    text-align:center;
+    text-decoration:none;
+    color:var(--text);
+    transition:0.3s;
+    border:1px solid transparent;
+    font-weight:bold;
+}
+
+.sidebar ul li a:hover{
+    border:1px solid var(--primary);
+    box-shadow:0 0 10px var(--primary);
+    color:var(--primary);
+}
+
+.sidebar ul li .active{
+    background:var(--primary);
+    color:black;
+    font-weight:bold;
+    box-shadow:0 0 15px var(--primary);
+}
+
+body.light-mode .sidebar ul li .active{
+    color:white;
+}
+
+/* MAIN */
+
+.main{
+    flex:1;
+    padding:35px;
+}
+
+/* TOP BAR */
+
+.top-bar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:35px;
+    border-bottom:1px solid var(--border);
+    padding-bottom:20px;
+}
+
+.title-area h1{
+    color:var(--primary);
+    font-size:42px;
+    margin-bottom:10px;
+    text-shadow:0 0 12px var(--primary);
+}
+
+/* THEME BUTTON */
+
+.theme-btn{
+
+    padding:12px 20px;
+
+    border:none;
+    border-radius:14px;
+
+    background:var(--primary);
+
+    color:black;
+
+    font-weight:bold;
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.theme-btn:hover{
+
+    transform:scale(1.05);
+
+    box-shadow:0 0 15px var(--primary);
+}
+
+body.light-mode .theme-btn{
+
+    color:white;
+}
+
+/* LESSON CARDS */
+
+.lesson-card{
+    background:var(--card);
+    border:1px solid var(--primary);
+    border-radius:22px;
+    padding:20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:25px;
+    transition:0.3s;
+    box-shadow:0 0 8px rgba(57,255,20,0.3);
+}
+
+body.light-mode .lesson-card{
+
+    box-shadow:none;
+}
+
+.lesson-card:hover{
+    transform:scale(1.02);
+    box-shadow:0 0 18px var(--primary);
+}
+
+/* LESSON IMAGE */
+
+.lesson-image img{
+    width:180px;
+    height:180px;
+    object-fit:cover;
+    border-radius:15px;
+    border:1px solid var(--primary);
+    box-shadow:0 0 12px rgba(57,255,20,0.4);
+}
+
+/* LESSON INFO */
+
+.lesson-info{
+    flex:1;
+    padding:0 25px;
+}
+
+.lesson-info h2{
+    color:var(--primary);
+    margin-bottom:10px;
+    font-size:28px;
+    text-shadow:0 0 8px var(--primary);
+}
+
+/* PROGRESS BAR */
+
+.progress-bar{
+    width:100%;
+    height:10px;
+    background:var(--progress-bg);
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:10px;
+}
+
+.progress{
+    height:100%;
+    background:var(--primary);
+    box-shadow:0 0 10px var(--primary);
+}
+
+.progress2{
+    width:2%;
+}
+
+.progress3{
+    width:8%;
+}
+
+/* PLAY BUTTON */
+
+.play-btn{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    border:2px solid var(--primary);
+    background:transparent;
+    color:var(--primary);
+    font-size:32px;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 0 10px var(--primary);
+}
+
+.play-btn:hover{
+    background:var(--primary);
+    color:black;
+    transform:scale(1.1);
+}
+
+body.light-mode .play-btn:hover{
+
+    color:white;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+    body{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        border-right:none;
+        border-bottom:2px solid var(--primary);
+    }
+
+    .lesson-card{
+        flex-direction:column;
+        text-align:center;
+        gap:20px;
+    }
+
+    .lesson-info{
+        padding:0;
+    }
+
+    .top-bar{
+        flex-direction:column;
+        gap:20px;
+        text-align:center;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <div class="logo">
+
+        <img src="logo/darkL.png"
+        id="logo"
+        alt="Logo">
+
+    </div>
+
+    <ul>
+
+        <li>
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a href="lesson.html"
+            class="active">
+
+                Lessons
+
+            </a>
+        </li>
+
+        <li>
+            <a href="Quiz.html">
+                Quiz
+            </a>
+        </li>
+
+        <li>
+            <a href="calendar.html">
+                Calendar
+            </a>
+        </li>
+
+        <li>
+            <a href="ToneDeaf.html">
+                Tone Test
+            </a>
+        </li>
+
+    </ul>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+    <!-- TOP BAR -->
+
+    <div class="top-bar">
+
+        <div class="title-area">
+
+            <h1>
+                VIRTUAL GUITAR LESSONS
+            </h1>
+
+        </div>
+
+        <button class="theme-btn"
+        onclick="toggleTheme()">
+
+            Dark / Light Mode
+
+        </button>
+
+    </div>
+
+    <!-- LESSON CARD 1 -->
+
+    <div class="lesson-card">
+
+        <div class="lesson-image">
+
+            <img src="I-icon/2.jpg">
+
+        </div>
+
+        <div class="lesson-info">
+
+            <h2>
+                1. Guitar Strings
+            </h2>
+
+            <div class="progress-bar">
+
+                <div class="progress progress2"></div>
+
+            </div>
+
+        </div>
+
+        <a href="lesson2.html">
+
+            <button class="play-btn">
+                ▶
+            </button>
+
+        </a>
+
+    </div>
+
+    <!-- LESSON CARD 2 -->
+
+    <div class="lesson-card">
+
+        <div class="lesson-image">
+
+            <img src="I-icon/3.jpg">
+
+        </div>
+
+        <div class="lesson-info">
+
+            <h2>
+                2. Basic Guitar Chords
+            </h2>
+
+            <div class="progress-bar">
+
+                <div class="progress progress3"></div>
+
+            </div>
+
+        </div>
+
+        <a href="lesson3.html">
+
+            <button class="play-btn">
+                ▶
+            </button>
+
+        </a>
+
+    </div>
+
+</div>
+
+<script>
+
+/* THEME */
+
+function toggleTheme(){
+
+    document.body.classList.toggle(
+    "light-mode"
+    );
+
+    const logo =
+    document.getElementById(
+    "logo"
+    );
+
+    if(
+    document.body.classList.contains(
+    "light-mode"
+    )
+    ){
+
+        logo.src =
+        "logo/lightL.png";
+
+        localStorage.setItem(
+        "theme",
+        "light"
+        );
+
+    } else {
+
+        logo.src =
+        "logo/darkL.png";
+
+        localStorage.setItem(
+        "theme",
+        "dark"
+        );
+    }
+}
+
+const savedTheme =
+localStorage.getItem(
+"theme"
+);
+
+if(savedTheme === "light"){
+
+    document.body.classList.add(
+    "light-mode"
+    );
+
+    document.getElementById(
+    "logo"
+    ).src =
+    "logo/lightL.png";
+}
+
+</script>
+
+</body>
+</html>

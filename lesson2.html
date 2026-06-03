@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Guitar Strings</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+.lesson-box{
+
+    background:#161616;
+
+    padding:45px;
+
+    border-radius:30px;
+
+    margin-top:35px;
+
+    border:2px solid #1aff66;
+
+    line-height:2;
+}
+
+.lesson-box h2{
+
+    font-size:45px;
+
+    color:#1aff66;
+
+    margin-bottom:30px;
+
+    text-align:center;
+}
+
+.lesson-section{
+
+    margin-top:40px;
+}
+
+.lesson-box h3{
+
+    font-size:32px;
+
+    margin-bottom:20px;
+
+    color:#1aff66;
+}
+
+.lesson-text{
+
+    font-size:23px;
+
+    margin-bottom:20px;
+}
+
+.lesson-list{
+
+    padding-left:25px;
+}
+
+.lesson-list li{
+
+    font-size:22px;
+
+    margin-bottom:25px;
+}
+
+.lesson-list li p{
+
+    margin-top:8px;
+
+    color:#cfcfcf;
+
+    font-size:19px;
+}
+
+.lesson-video{
+
+    width:100%;
+
+    border-radius:20px;
+
+    margin-top:35px;
+}
+
+.youtube-box{
+
+    margin-top:35px;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    background:#111;
+
+    border:1px solid #1aff66;
+}
+
+.youtube-box p{
+
+    font-size:21px;
+
+    margin-bottom:15px;
+}
+
+.youtube-box a{
+
+    display:inline-block;
+
+    padding:12px 20px;
+
+    background:#1aff66;
+
+    color:black;
+
+    text-decoration:none;
+
+    border-radius:12px;
+
+    font-weight:bold;
+
+    transition:0.3s;
+}
+
+.youtube-box a:hover{
+
+    transform:scale(1.05);
+}
+
+body.light-mode .lesson-box{
+
+    background:#eadcc8;
+
+    border:2px solid #7a431d;
+
+    color:#5a3215;
+}
+
+body.light-mode .lesson-box h2,
+body.light-mode .lesson-box h3{
+
+    color:#7a431d;
+}
+
+body.light-mode .youtube-box{
+
+    background:#f4e4cf;
+
+    border:1px solid #7a431d;
+}
+
+body.light-mode .lesson-list li p{
+
+    color:#6d4a2e;
+}
+
+body.light-mode .youtube-box a{
+
+    background:#7a431d;
+
+    color:white;
+}
+
+/* THEME VARIABLES */
+
+:root{
+
+    --bg:#0a0a0a;
+    --text:white;
+
+    --sidebar:#111;
+
+    --primary:#1aff66;
+
+    --card:#111;
+
+    --shadow:0 0 20px #1aff66;
+}
+
+/* LIGHT MODE */
+
+body.light-mode{
+
+    --bg:#e6c7a2;
+    --text:#4b2d16;
+
+    --sidebar:#d7b38a;
+
+    --primary:#7a431d;
+
+    --card:#f5e7d6;
+
+    --shadow:none;
+}
+
+/* BODY */
+
+body{
+    display:flex;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    transition:0.4s;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    width:230px;
+    background:var(--sidebar);
+    border-right:2px solid var(--primary);
+    padding:20px;
+    transition:0.4s;
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.logo img{
+    width:120px;
+}
+
+/* MENU */
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.menu a{
+    color:var(--text);
+    text-decoration:none;
+    padding:12px;
+    border-radius:12px;
+    transition:0.3s;
+    font-weight:bold;
+}
+
+.menu a:hover{
+    background:var(--primary);
+    color:black;
+}
+
+body.light-mode .menu a:hover{
+    color:white;
+}
+
+.active{
+    background:var(--primary);
+    color:black !important;
+}
+
+body.light-mode .active{
+    color:white !important;
+}
+
+/* MAIN */
+
+.main{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+}
+
+/* TITLE */
+
+.lesson-title{
+    color:var(--primary);
+    margin-bottom:30px;
+    font-size:40px;
+    text-align:center;
+}
+
+/* IMAGE */
+
+.lesson-image{
+    width:400px;
+    max-width:90%;
+    border-radius:25px;
+    border:2px solid var(--primary);
+    box-shadow:var(--shadow);
+    margin-bottom:30px;
+    transition:0.3s;
+}
+
+/* BUTTONS */
+
+.parts-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:15px;
+    margin-bottom:30px;
+}
+
+.parts-buttons button{
+    padding:12px 20px;
+    border:none;
+    border-radius:12px;
+    background:var(--card);
+    color:var(--primary);
+    border:1px solid var(--primary);
+    cursor:pointer;
+    transition:0.3s;
+    font-weight:bold;
+}
+
+.parts-buttons button:hover{
+    background:var(--primary);
+    color:black;
+    box-shadow:0 0 15px var(--primary);
+}
+
+body.light-mode .parts-buttons button:hover{
+    color:white;
+}
+
+/* THEME BUTTON */
+
+.theme-btn{
+
+    margin-top:25px;
+
+    padding:14px 22px;
+
+    border:none;
+    border-radius:14px;
+
+    background:var(--primary);
+
+    color:black;
+
+    font-weight:bold;
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.theme-btn:hover{
+
+    transform:scale(1.05);
+
+    box-shadow:0 0 15px var(--primary);
+}
+
+body.light-mode .theme-btn{
+
+    color:white;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    body{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        border-right:none;
+        border-bottom:2px solid var(--primary);
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <div class="logo">
+
+        <img src="logo/darkL.png"
+        id="logo">
+
+    </div>
+
+    <div class="menu">
+
+        <a href="dashboard.html">
+            Dashboard
+        </a>
+
+        <a href="lesson.html"
+        class="active">
+
+            Lessons
+
+        </a>
+
+        <a href="Quiz.html">
+            Quiz
+        </a>
+
+        <a href="calendar.html">
+            Calendar
+        </a>
+
+        <a href="ToneDeaf.html">
+            Tone Test
+        </a>
+
+    </div>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+ <div class="lesson-box">
+
+    <h2>Guitar Strings and Finger Numbers</h2>
+
+    <p class="lesson-text">
+        A guitar string is made from different materials that vibrate
+        to produce musical notes when plucked or strummed.
+        These strings are stretched across the guitar and create sound
+        through vibration.
+    </p>
+
+    <p class="lesson-text">
+        A standard guitar has six strings arranged from the thickest
+        string to the thinnest string.
+    </p>
+
+    <div class="lesson-section">
+
+        <h3> Guitar Strings</h3>
+
+        <ul class="lesson-list">
+
+            <li>
+                <strong>6th String – Low E</strong>
+                <p>
+                    The thickest string and produces the lowest sound.
+                </p>
+            </li>
+
+            <li>
+                <strong>5th String – A</strong>
+                <p>
+                    Produces a deep and warm tone.
+                </p>
+            </li>
+
+            <li>
+                <strong>4th String – D</strong>
+                <p>
+                    Commonly used for rhythm and chords.
+                </p>
+            </li>
+
+            <li>
+                <strong>3rd String – G</strong>
+                <p>
+                    Often used for melodies and lead playing.
+                </p>
+            </li>
+
+            <li>
+                <strong>2nd String – B</strong>
+                <p>
+                    Produces a brighter and smoother sound.
+                </p>
+            </li>
+
+            <li>
+                <strong>1st String – High E</strong>
+                <p>
+                    The thinnest string and produces the highest sound.
+                </p>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <div class="lesson-section">
+
+        <h3> Finger Numbers</h3>
+
+        <ul class="lesson-list">
+
+            <li>1 – Index Finger</li>
+            <li>2 – Middle Finger</li>
+            <li>3 – Ring Finger</li>
+            <li>4 – Pinky Finger</li>
+
+        </ul>
+
+    </div>
+
+    <video controls class="lesson-video">
+
+        <source src="bstrings.mp4" type="video/mp4">
+
+    </video>
+
+    <div class="youtube-box">
+
+        <h3> Recommended Video</h3>
+
+        <p>
+            Ultimate Guitar - String Names | Guitar Basics
+        </p>
+
+        <a
+        href="https://youtu.be/By93_ByoefE?si=JiZl39OkL8VenTsu"
+        target="_blank">
+
+            Watch on YouTube
+
+        </a>
+
+    </div>
+
+</div>
+
+    <h1 class="lesson-title"
+    id="lessonTitle">
+
+       Low E String
+
+    </h1>
+
+    <img src="strings/a.png"
+    class="lesson-image"
+    id="lessonImage">
+
+    <div class="parts-buttons">
+
+        <button onclick="changePart(
+        'Low E String',
+        'strings/a.png'
+        )">
+
+            Low E String
+
+        </button>
+
+        <button onclick="changePart(
+        'A String',
+        'strings/b.png'
+        )">
+
+            A String
+
+        </button>
+
+        <button onclick="changePart(
+        'D String',
+        'strings/cc.png'
+        )">
+
+            D String
+
+        </button>
+
+        <button onclick="changePart(
+        'G String',
+        'strings/d.png'
+        )">
+
+            G String
+
+        </button>
+
+        <button onclick="changePart(
+        'B String',
+        'strings/e.png'
+        )">
+
+           B String
+
+        </button>
+
+        <button onclick="changePart(
+        'High E String',
+        'strings/n.png'
+        )">
+
+            High E String
+
+        </button>
+
+    </div>
+
+    <!-- THEME BUTTON -->
+
+    <button class="theme-btn"
+    onclick="toggleTheme()">
+
+        Dark / Light Mode
+
+    </button>
+
+</div>
+
+<script>
+
+/* CHANGE IMAGE */
+
+function changePart(title,image){
+
+    document.getElementById(
+    "lessonTitle"
+    ).textContent = title;
+
+    document.getElementById(
+    "lessonImage"
+    ).src = image;
+}
+
+/* THEME */
+
+const savedTheme =
+localStorage.getItem("theme");
+
+const logo =
+document.getElementById("logo");
+
+if(savedTheme === "light"){
+
+    document.body.classList.add(
+    "light-mode"
+    );
+
+    logo.src =
+    "logo/lightL.png";
+
+}else{
+
+    logo.src =
+    "logo/darkL.png";
+}
+
+/* TOGGLE THEME */
+
+function toggleTheme(){
+
+    document.body.classList.toggle(
+    "light-mode"
+    );
+
+    if(
+    document.body.classList.contains(
+    "light-mode"
+    )
+    ){
+
+        localStorage.setItem(
+        "theme",
+        "light"
+        );
+
+        logo.src =
+        "logo/lightL.png";
+
+    } else {
+
+        localStorage.setItem(
+        "theme",
+        "dark"
+        );
+
+        logo.src =
+        "logo/darkL.png";
+    }
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LumenFretPath Dashboard</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#0a0a0a;
+    color:white;
+    transition:0.4s;
+}
+
+body.light-mode{
+    background:#c19058;
+    color:#5a3215;
+}
+
+:root{
+    --post-bg:#111;
+    --community-bg:#181818;
+    --comment-bg:#1a1a1a;
+    --text:white;
+}
+
+body.light-mode{
+    --post-bg:#eadcc8;
+    --community-bg:#d7b38a;
+    --comment-bg:#f5e7d6;
+    --text:#4b2d16;
+}
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:25px 60px;
+    background:#111;
+    border-bottom:2px solid #1aff66;
+    transition:0.4s;
+}
+
+body.light-mode .navbar{
+    background:#b88652;
+    border-bottom:2px solid #6d3f1c;
+}
+
+.logo-img{
+    width:170px;
+}
+
+.menu{
+    display:flex;
+    gap:45px;
+}
+
+.menu a{
+    color:white;
+    text-decoration:none;
+    transition:0.3s;
+    font-size:22px;
+    font-weight:bold;
+}
+
+body.light-mode .menu a{
+    color:#4b2d16;
+}
+
+.menu a:hover{
+    color:#1aff66;
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.profile img{
+    width:85px;
+    height:85px;
+    border-radius:50%;
+    border:2px solid #1aff66;
+    object-fit:cover;
+}
+
+body.light-mode .profile img{
+    border:2px solid #7a431d;
+}
+
+.container{
+    display:flex;
+    gap:35px;
+    padding:45px;
+}
+
+.left-panel,
+.right-panel{
+    background:#181818;
+    border-radius:25px;
+    padding:35px;
+    box-shadow:0 0 15px #1aff66;
+    transition:0.4s;
+}
+
+.left-panel{
+    width:35%;
+}
+
+.right-panel{
+    width:65%;
+}
+
+body.light-mode .left-panel,
+body.light-mode .right-panel{
+    background:#d7b38a;
+    box-shadow:none;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:25px;
+    margin-top:20px;
+}
+
+
+.card{
+    background:#111;
+    border:2px solid #1aff66;
+    border-radius:25px;
+    padding:35px;
+    text-align:center;
+    transition:0.3s;
+    box-shadow:0 0 15px #1aff66;
+    min-height:320px;
+}
+
+.card:hover{
+    transform:scale(1.03);
+}
+
+body.light-mode .card{
+    background:#eadcc8;
+    border:1px solid #8b5a2b;
+    box-shadow:none;
+}
+
+.card img{
+    width:220px;
+    height:220px;
+    object-fit:contain;
+}
+
+.card h2{
+    color:#1aff66;
+    margin-top:20px;
+    font-size:32px;
+}
+
+body.light-mode .card h2{
+    color:#7a431d;
+}
+#seeMoreBtn{
+    color:black;
+}
+
+body.light-mode #seeMoreBtn{
+    color:white;
+}
+
+.settings{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-top:20px;
+}
+
+.settings h2{
+    color:#1aff66;
+    margin-bottom:25px;
+    font-size:45px;
+}
+
+body.light-mode .settings h2{
+    color:#7a431d;
+}
+#profilePic{
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    object-fit:cover;
+    border:4px solid #1aff66;
+    margin-bottom:25px;
+}
+
+body.light-mode #profilePic{
+    border:4px solid #7a431d;
+}
+
+#userAvatar{
+    width:85px;
+    height:85px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid #1aff66;
+}
+
+body.light-mode #userAvatar{
+    border:2px solid #7a431d;
+}
+
+/* BUTTONS */
+.upload-btn,
+.theme-btn{
+    padding:16px 28px;
+    border:none;
+    border-radius:15px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:20px;
+    margin-top:10px;
+}
+
+/* COMMUNITY */
+#communitySection{
+    margin-top:30px;
+}
+.comment-pfp{
+
+    width:40px;
+    height:40px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:2px solid #1aff66;
+
+    flex-shrink:0;
+}
+
+body.light-mode .comment-pfp{
+
+    border:2px solid #7a431d;
+}
+
+.single-comment{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:10px;
+
+    margin-top:10px;
+}
+
+.community-box{
+    background:var(--community-bg);
+    padding:25px;
+    border-radius:20px;
+}
+
+
+#postInput{
+    width:100%;
+    height:120px;
+    border:none;
+    border-radius:15px;
+    padding:15px;
+    font-size:16px;
+    margin-bottom:15px;
+    resize:none;
+
+    background:var(--comment-bg);
+    color:var(--text);
+}
+.post-image{
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.post-image:hover{
+    transform:scale(1.02);
+}
+/* SEE MORE / SEE LESS BUTTON */
+
+.more-btn{
+
+    margin-top:20px;
+    width:100%;
+    padding:15px;
+
+    border:none;
+    border-radius:15px;
+
+    background:#1aff66;
+    color:black;
+
+    font-weight:bold;
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.more-btn:hover{
+
+    transform:scale(1.02);
+
+    box-shadow:0 0 15px #1aff66;
+}
+
+body.light-mode .more-btn{
+
+    background:#7a431d;
+
+    color:white;
+}
+
+.community-box button{
+    padding:14px 28px;
+    border:none;
+    border-radius:14px;
+
+    background:linear-gradient(
+        135deg,
+        #1aff66,
+        #00cc55
+    );
+
+    color:#000;
+    font-weight:bold;
+    font-size:16px;
+
+    cursor:pointer;
+
+    transition:0.3s ease;
+
+    box-shadow:
+    0 4px 15px rgba(26,255,102,0.35);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+}
+
+.community-box button:hover{
+    transform:translateY(-2px) scale(1.03);
+
+    box-shadow:
+    0 8px 20px rgba(26,255,102,0.5);
+}
+
+.community-box button:active{
+    transform:scale(0.97);
+}
+
+body.light-mode .community-box button{
+    background:linear-gradient(
+        135deg,
+        #7a431d,
+        #9c5b2b
+    );
+
+    color:white;
+
+    box-shadow:
+    0 4px 15px rgba(122,67,29,0.3);
+}
+
+.post{
+    background:var(--post-bg);
+    margin-top:20px;
+    padding:15px;
+    border-radius:15px;
+    color:var(--text);
+
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.comments{
+    margin-top:10px;
+}
+
+.comments p{
+    background:var(--comment-bg);
+    padding:8px;
+    border-radius:10px;
+    font-size:14px;
+}
+
+.post-image{
+    width:100%;
+    max-height:400px;
+    object-fit:cover;
+    border-radius:15px;
+    margin-top:10px;
+}
+
+.image-upload{
+    margin-bottom:15px;
+}
+
+.comment-input-area button{
+    min-width:90px;
+}
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+
+@media(max-width:900px){
+
+.container{
+    flex-direction:column;
+}
+
+.left-panel,
+.right-panel{
+    width:100%;
+}
+
+.cards{
+    grid-template-columns:1fr;
+}
+
+}
+.custom-file-upload{
+
+    display:inline-block;
+
+    padding:14px 24px;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    font-size:16px;
+
+    transition:0.3s;
+
+    background:linear-gradient(
+        135deg,
+        #1aff66,
+        #00cc55
+    );
+
+    color:black;
+
+    box-shadow:
+    0 4px 15px rgba(26,255,102,0.35);
+
+    margin-bottom:15px;
+}
+
+.custom-file-upload:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 8px 20px rgba(26,255,102,0.5);
+}
+
+
+
+body.light-mode .custom-file-upload{
+
+    background:linear-gradient(
+        135deg,
+        #7a431d,
+        #9c5b2b
+    );
+
+    color:white;
+
+    box-shadow:
+    0 4px 15px rgba(122,67,29,0.3);
+}
+
+</style>
+</head>
+<div id="imageModal"
+style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.9);
+justify-content:center;
+align-items:center;
+z-index:9999;
+">
+
+    <span
+    onclick="closeImage()"
+    style="
+    position:absolute;
+    top:20px;
+    right:35px;
+    font-size:45px;
+    color:white;
+    cursor:pointer;
+    ">
+
+        ✕
+
+    </span>
+
+    <img
+    id="modalImage"
+    style="
+    max-width:90%;
+    max-height:90%;
+    border-radius:20px;
+    box-shadow:0 0 25px #1aff66;
+    ">
+</div>
+<body>
+
+<div class="navbar">
+
+    <img src="logo/darkL.png"
+    class="logo-img"
+    id="logo">
+
+    <div class="menu">
+
+        <a href="dashboard.html">Dashboard</a>
+        <a href="lesson.html">Lessons</a>
+        <a href="Quiz.html">Quiz</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="ToneDeaf.html">Tone Test</a>
+
+    </div>
+
+    <div class="profile">
+
+        <img id="userAvatar"
+        src="https://via.placeholder.com/150">
+
+        <div>
+
+            <h3 id="username">
+                User
+            </h3>
+
+            <span>
+                ● Active
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="container">
+    <div class="left-panel">
+
+        <div class="settings">
+
+            <h2>Settings</h2>
+
+            <img id="profilePic"
+            src="https://via.placeholder.com/150">
+
+            <input type="file"
+            accept="image/*"
+            id="uploadPic"
+            hidden>
+
+            <button class="upload-btn"
+            onclick="document.getElementById('uploadPic').click()">
+
+                Upload Profile Picture
+
+            </button>
+
+            <button class="theme-btn"
+            onclick="toggleTheme()">
+
+                Dark / Light Mode
+
+            </button>
+          <button class="theme-btn"
+         onclick="logoutUser()">
+           Logout
+        </button>
+        </div>
+
+    </div>
+    <div class="right-panel">
+
+        <h1 style="margin-bottom:25px; font-size:55px;">
+            My Dashboard
+        </h1>
+
+        <div class="cards">
+
+            <a href="lesson.html">
+
+                <div class="card">
+
+                    <img src="lesson.png">
+
+                    <h2>
+                        Virtual Guitar Lessons
+                    </h2>
+
+                </div>
+
+            </a>
+
+            <a href="Quiz.html">
+
+                <div class="card">
+
+                    <img src="test.png">
+
+                    <h2>
+                        Interactive Quiz
+                    </h2>
+
+                </div>
+
+            </a>
+
+            <a href="calendar.html">
+
+                <div class="card">
+
+                    <img src="c.png">
+
+                    <h2>
+                        Calendar
+                    </h2>
+
+                </div>
+
+            </a>
+
+            <a href="ToneDeaf.html">
+
+                <div class="card">
+
+                    <img src="tdt.png">
+
+                    <h2>
+                        Tone Deaf Test
+                    </h2>
+
+                </div>
+
+            </a>
+
+        </div>
+
+      
+      <section id="communitySection">
+
+    <h1 style="margin-top:40px; margin-bottom:20px;">
+        Community
+    </h1>
+
+    <div class="community-box">
+
+        <textarea
+        id="postInput"
+        placeholder="Share your progress..."></textarea>
+
+       <label for="postImage"
+class="custom-file-upload">
+
+     Upload Image
+
+    </label>
+
+    <input
+         type="file"
+         id="postImage"
+          accept="image/*"
+          hidden>
+        <button onclick="addPost()">
+             Share Progress
+        </button>
+
+        <div id="posts"></div>
+
+    </div>
+
+
+</section>
+    </div>
+
+</div>
+<div id="imageModal"
+style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.9);
+justify-content:center;
+align-items:center;
+z-index:999;
+">
+
+    <span
+    onclick="closeImage()"
+    style="
+    position:absolute;
+    top:20px;
+    right:40px;
+    font-size:40px;
+    color:white;
+    cursor:pointer;
+    ">
+        ✕
+    </span>
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+addDoc,
+getDocs,
+deleteDoc,
+doc
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+/* FIREBASE */
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyDbk9-jlBbOFv6uUnlRLF0f0Efe1-gJGkM",
+
+authDomain: "lumen-fret-path.firebaseapp.com",
+
+projectId: "lumen-fret-path",
+
+storageBucket: "lumen-fret-path.firebasestorage.app",
+
+messagingSenderId: "607922775434",
+
+appId: "1:607922775434:web:f528986b75fb2b860a1473",
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
+
+/* LOGIN CHECK */
+
+if(!localStorage.getItem("username")){
+
+    window.location.href =
+    "index.html";
+}
+
+/* USERNAME */
+
+const savedName =
+localStorage.getItem("username");
+
+if(savedName){
+
+    document.getElementById(
+    "username"
+    ).textContent = savedName;
+}
+
+/* PROFILE PICTURE */
+
+const savedPic =
+localStorage.getItem(
+"profilePic"
+);
+
+if(savedPic){
+
+    document.getElementById(
+    "profilePic"
+    ).src = savedPic;
+
+    document.getElementById(
+    "userAvatar"
+    ).src = savedPic;
+}
+
+/* UPLOAD PROFILE */
+
+document.getElementById(
+"uploadPic"
+).addEventListener(
+"change",
+function(event){
+
+    const file =
+    event.target.files[0];
+
+    if(!file) return;
+
+    const reader =
+    new FileReader();
+
+    reader.onload = function(){
+
+        document.getElementById(
+        "profilePic"
+        ).src = reader.result;
+
+        document.getElementById(
+        "userAvatar"
+        ).src = reader.result;
+
+        localStorage.setItem(
+        "profilePic",
+        reader.result
+        );
+    };
+
+    reader.readAsDataURL(file);
+});
+
+/* THEME */
+
+window.toggleTheme = function(){
+
+    document.body.classList.toggle(
+    "light-mode"
+    );
+
+    const logo =
+    document.getElementById(
+    "logo"
+    );
+
+    if(
+    document.body.classList.contains(
+    "light-mode"
+    )
+    ){
+
+        logo.src =
+        "logo/lightL.png";
+
+        localStorage.setItem(
+        "theme",
+        "light"
+        );
+
+    } else {
+
+        logo.src =
+        "logo/darkL.png";
+
+        localStorage.setItem(
+        "theme",
+        "dark"
+        );
+    }
+};
+
+const savedTheme =
+localStorage.getItem(
+"theme"
+);
+
+if(savedTheme === "light"){
+
+    document.body.classList.add(
+    "light-mode"
+    );
+
+    document.getElementById(
+    "logo"
+    ).src =
+    "logo/lightL.png";
+}
+
+window.addPost = async function(){
+
+    const input =
+    document.getElementById(
+    "postInput"
+    );
+
+    const imageInput =
+    document.getElementById(
+    "postImage"
+    );
+
+    const text =
+    input.value.trim();
+
+    const file =
+    imageInput.files[0];
+
+    if(text === "" && !file) return;
+
+    let imageData = "";
+
+    /* IF IMAGE EXISTS */
+
+    if(file){
+
+        if(file.size > 2000000){
+
+            alert(
+            "Image too large!"
+            );
+
+            return;
+        }
+
+        imageData =
+        await compressImage(file);
+    }
+
+    /* SAVE POST */
+
+    await addDoc(
+    collection(db,"posts"),{
+
+        username:
+        localStorage.getItem(
+        "username"
+        ) || "Anonymous",
+
+        profilePic:
+        localStorage.getItem(
+        "profilePic"
+        ) || "https://via.placeholder.com/50",
+
+        message:text,
+
+        image:imageData,
+
+        comments:[]
+    });
+
+    input.value = "";
+    imageInput.value = "";
+
+    loadPosts();
+};
+
+/* IMAGE COMPRESS FUNCTION */
+
+async function compressImage(file){
+
+    return new Promise((resolve)=>{
+
+        const reader =
+        new FileReader();
+
+        reader.readAsDataURL(file);
+
+        reader.onload = function(event){
+
+            const img =
+            new Image();
+
+            img.src =
+            event.target.result;
+
+            img.onload = function(){
+
+                const canvas =
+                document.createElement(
+                "canvas"
+                );
+
+                const ctx =
+                canvas.getContext(
+                "2d"
+                );
+
+                const maxWidth = 600;
+
+                const scale =
+                maxWidth / img.width;
+
+                canvas.width =
+                maxWidth;
+
+                canvas.height =
+                img.height * scale;
+
+                ctx.drawImage(
+                img,
+                0,
+                0,
+                canvas.width,
+                canvas.height
+                );
+
+                const compressed =
+                canvas.toDataURL(
+                "image/jpeg",
+                0.5
+                );
+
+                resolve(compressed);
+
+            };
+
+        };
+
+    });
+
+}
+    
+
+/* LOAD POSTS */
+
+let visiblePosts = 3;
+
+async function loadPosts(){
+
+    const postsContainer =
+    document.getElementById(
+    "posts"
+    );
+
+    postsContainer.innerHTML = "";
+
+    const querySnapshot =
+    await getDocs(
+    collection(db,"posts")
+    );
+
+    const posts = [];
+
+    querySnapshot.forEach((docData)=>{
+
+        posts.push({
+
+            id:docData.id,
+            ...docData.data()
+
+        });
+    });
+
+    posts.reverse();
+
+    const displayedPosts =
+    posts.slice(0,visiblePosts);
+
+    displayedPosts.forEach((data,index)=>{
+
+        let commentHTML = "";
+
+        if(data.comments){
+
+            data.comments.forEach(c=>{
+
+                commentHTML += `
+
+                <div class="single-comment">
+
+                    <img
+                    src="${c.profilePic}"
+                    class="comment-pfp">
+
+                    <div>
+
+                        <strong>
+                            ${c.username}
+                        </strong>
+
+                        <p>
+                            ${c.message}
+                        </p>
+
+                    </div>
+
+                </div>
+
+                `;
+            });
+        }
+
+        postsContainer.innerHTML += `
+
+        <div class="post">
+
+            <div style="
+            display:flex;
+            align-items:center;
+            gap:10px;
+            ">
+
+                <img
+                src="${data.profilePic}"
+                style="
+                width:50px;
+                height:50px;
+                border-radius:50%;
+                object-fit:cover;
+                border:2px solid #1aff66;
+                ">
+
+                <h3>
+                    ${data.username}
+                </h3>
+
+            </div>
+
+            <div style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:10px;
+            ">
+
+                <p>
+                    ${data.message}
+                </p>
+
+                <button
+                onclick="deletePost('${data.id}')"
+                class="delete-btn">
+
+                    Delete
+
+                </button>
+
+            </div>
+
+            ${data.image ? `
+
+            <img
+            src="${data.image}"
+            class="post-image"
+            onclick="openImage('${data.image}')">
+
+            ` : ""}
+
+            <div class="comments">
+
+                ${commentHTML}
+
+            </div>
+
+        </div>
+
+        `;
+    });
+
+    if(posts.length > 3){
+
+        postsContainer.innerHTML += `
+
+        <button
+        id="seeMoreBtn"
+        onclick="togglePosts()"
+        class="more-btn">
+
+        ${visiblePosts >= posts.length
+        ? "See Less"
+        : "See More"}
+
+        </button>
+
+        `;
+    }
+}
+
+/* DELETE POST */
+
+window.deletePost =
+async function(id){
+
+    await deleteDoc(
+    doc(db,"posts",id)
+    );
+
+    loadPosts();
+}
+
+/* IMAGE MODAL */
+
+window.openImage =
+function(src){
+
+    document.getElementById(
+    "imageModal"
+    ).style.display = "flex";
+
+    document.getElementById(
+    "modalImage"
+    ).src = src;
+}
+
+window.closeImage =
+function(){
+
+    document.getElementById(
+    "imageModal"
+    ).style.display = "none";
+}
+
+/* SEE MORE */
+
+window.togglePosts =
+async function(){
+
+    const querySnapshot =
+    await getDocs(
+    collection(db,"posts")
+    );
+
+    const posts = [];
+
+    querySnapshot.forEach((doc)=>{
+
+        posts.push(doc.data());
+
+    });
+
+    if(visiblePosts >= posts.length){
+
+        visiblePosts = 3;
+
+        document.getElementById(
+        "communitySection"
+        ).scrollIntoView({
+
+            behavior:"smooth"
+
+        });
+
+    } else {
+
+        visiblePosts += 3;
+    }
+
+    loadPosts();
+}
+
+/* LOGOUT */
+
+window.logoutUser = function(){
+
+    localStorage.removeItem(
+    "username"
+    );
+
+    window.location.href =
+    "index.html";
+}
+
+/* START */
+
+loadPosts();
+
+</script>
+</body>
+</html>
+
+

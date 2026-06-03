@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Tone Deaf Test</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    display:flex;
+    background:#0a0a0a;
+    color:white;
+    min-height:100vh;
+    transition:0.4s;
+}
+
+/* LIGHT MODE */
+
+body.light-mode{
+    background:#c19058;
+    color:#4b2d16;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    width:230px;
+    background:#111;
+    border-right:2px solid #1aff66;
+    padding:20px;
+    transition:0.4s;
+}
+
+body.light-mode .sidebar{
+    background:#b88652;
+    border-right:2px solid #7a431d;
+}
+
+/* LOGO */
+
+.logo{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.logo img{
+    width:120px;
+}
+
+/* MENU */
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.menu a{
+    color:white;
+    text-decoration:none;
+    padding:12px;
+    border-radius:12px;
+    transition:0.3s;
+}
+
+body.light-mode .menu a{
+    color:#4b2d16;
+}
+
+.menu a:hover{
+    background:#1aff66;
+    color:black;
+}
+
+body.light-mode .menu a:hover{
+    background:#7a431d;
+    color:white;
+}
+
+.active{
+    background:#1aff66;
+    color:black !important;
+}
+
+body.light-mode .active{
+    background:#7a431d;
+    color:white !important;
+}
+
+/* MAIN */
+
+.main{
+    flex:1;
+    padding:40px;
+}
+
+/* TITLE */
+
+.test-title{
+    color:#1aff66;
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+body.light-mode .test-title{
+    color:#7a431d;
+}
+
+/* TEST BOX */
+
+.test-box{
+    background:#111;
+    border:2px solid #1aff66;
+    border-radius:25px;
+    padding:35px;
+    box-shadow:0 0 20px #1aff66;
+    transition:0.4s;
+}
+
+body.light-mode .test-box{
+    background:#eadcc8;
+    border:2px solid #7a431d;
+    box-shadow:none;
+}
+
+/* QUESTION */
+
+.question{
+    font-size:28px;
+    color:#1aff66;
+    margin-bottom:25px;
+}
+
+body.light-mode .question{
+    color:#7a431d;
+}
+
+/* AUDIO */
+
+.audio-player{
+    width:100%;
+    margin-bottom:30px;
+}
+
+/* OPTIONS */
+
+.options{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.option{
+    background:#0a0a0a;
+    border:2px solid #1aff66;
+    border-radius:15px;
+    padding:18px;
+    cursor:pointer;
+    transition:0.3s;
+    font-size:18px;
+}
+
+body.light-mode .option{
+    background:#f5e7d6;
+    border:2px solid #7a431d;
+    color:#4b2d16;
+}
+
+.option:hover{
+    background:#1aff66;
+    color:black;
+}
+
+body.light-mode .option:hover{
+    background:#7a431d;
+    color:white;
+}
+
+.selected{
+    background:#1aff66;
+    color:black;
+}
+
+body.light-mode .selected{
+    background:#7a431d;
+    color:white;
+}
+
+/* BUTTON */
+
+.submit-btn{
+    margin-top:20px;
+    width:100%;
+    padding:18px;
+    border:none;
+    border-radius:15px;
+    background:#1aff66;
+    color:black;
+    font-size:20px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.submit-btn:hover{
+    box-shadow:0 0 20px #1aff66;
+}
+
+body.light-mode .submit-btn{
+    background:#7a431d;
+    color:white;
+}
+
+/* PROGRESS */
+
+.progress-section{
+    margin-top:35px;
+}
+
+.progress-title{
+    color:#1aff66;
+    margin-bottom:10px;
+}
+
+body.light-mode .progress-title{
+    color:#7a431d;
+}
+
+.progress-bar{
+    width:100%;
+    height:12px;
+    background:#1f1f1f;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress{
+    width:0%;
+    height:100%;
+    background:#1aff66;
+}
+
+body.light-mode .progress{
+    background:#7a431d;
+}
+
+/* RESULT */
+
+.result-box{
+    text-align:center;
+}
+
+.result-box h1{
+    color:#1aff66;
+    margin-bottom:15px;
+}
+
+body.light-mode .result-box h1{
+    color:#7a431d;
+}
+
+/* THEME BUTTON */
+
+.theme-btn{
+    margin-top:25px;
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:#1aff66;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+body.light-mode .theme-btn{
+    background:#7a431d;
+    color:white;
+}
+
+/* MODE BUTTONS */
+
+.mode-buttons{
+    display:flex;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+    body{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        border-right:none;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <div class="logo">
+
+        <img src="logo/darkL.png"
+        id="logo">
+
+    </div>
+
+    <div class="menu">
+
+        <a href="dashboard.html">
+            Dashboard
+        </a>
+
+        <a href="lesson.html">
+            Lessons
+        </a>
+
+        <a href="quiz.html">
+            Quiz
+        </a>
+
+        <a href="calendar.html">
+            Calendar
+        </a>
+
+        <a href="#"
+        class="active">
+            Tone Test
+        </a>
+
+    </div>
+
+    <button class="theme-btn"
+    onclick="toggleTheme()">
+
+        Dark / Light Mode
+
+    </button>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+    <h1 class="test-title">
+
+        TONE DEAF TEST
+
+    </h1>
+
+    <!-- MODE BUTTONS -->
+
+    <div class="mode-buttons">
+
+        <button class="submit-btn"
+        onclick="setMode('easy')">
+
+            Easy Mode
+
+        </button>
+
+        <button class="submit-btn"
+        onclick="setMode('hard')">
+
+            Hard Mode
+
+        </button>
+
+    </div>
+
+    <!-- TEST BOX -->
+
+    <div class="test-box"
+    id="testBox">
+
+        <h2 class="question"
+        id="question"></h2>
+
+        <audio controls
+        class="audio-player"
+        id="audioPlayer">
+
+            <source src=""
+            type="audio/m4a">
+
+        </audio>
+
+        <div class="options"
+        id="options"></div>
+
+        <button class="submit-btn"
+        onclick="submitAnswer()">
+
+            Submit Answer
+
+        </button>
+
+        <div class="progress-section">
+
+            <h3 class="progress-title"
+            id="progressText">
+
+                Progress
+
+            </h3>
+
+            <div class="progress-bar">
+
+                <div class="progress"
+                id="progressBar"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+/* THEME */
+
+function toggleTheme(){
+
+    document.body.classList.toggle(
+    "light-mode"
+    );
+
+    const logo =
+    document.getElementById("logo");
+
+    if(
+    document.body.classList.contains(
+    "light-mode"
+    )
+    ){
+
+        logo.src =
+        "logo/lightL.png";
+
+        localStorage.setItem(
+        "theme",
+        "light"
+        );
+
+    } else {
+
+        logo.src =
+        "logo/darkL.png";
+
+        localStorage.setItem(
+        "theme",
+        "dark"
+        );
+    }
+}
+
+/* LOAD SAVED THEME */
+
+const savedTheme =
+localStorage.getItem("theme");
+
+if(savedTheme === "light"){
+
+    document.body.classList.add(
+    "light-mode"
+    );
+
+    document.getElementById(
+    "logo"
+    ).src =
+    "logo/lightL.png";
+}
+
+/* EASY MODE */
+
+/* EASY MODE */
+
+/* EASY MODE */
+
+const easyQuiz = [
+
+{
+    question: "Identify this major chord.",
+    audio: "audio/C Major.m4a",
+    choices: [
+        "C Major",
+        "G Major"
+    ],
+    answer: "C Major"
+},
+
+{
+    question: "Identify this major chord.",
+    audio: "audio/G Major.m4a",
+    choices: [
+        "F Major",
+        "G Major"
+    ],
+    answer: "G Major"
+},
+
+{
+    question: "Identify this major chord.",
+    audio: "audio/F Major.m4a",
+    choices: [
+        "F Major",
+        "C Major"
+    ],
+    answer: "F Major"
+},
+
+{
+    question: "Identify this power chord.",
+    audio: "audio/A5.m4a",
+    choices: [
+        "A5",
+        "C5"
+    ],
+    answer: "A5"
+}
+
+];
+
+/* HARD MODE */
+
+const hardQuiz = [
+
+{
+    question: "Identify this chord.",
+    audio: "audio/C Minor.m4a",
+    choices: [
+        "C Major",
+        "C Minor",
+        "G Minor",
+        "F Major"
+    ],
+    answer: "C Minor"
+},
+
+{
+    question: "Identify this chord.",
+    audio: "audio/G Minor.m4a",
+    choices: [
+        "G Major",
+        "G Minor",
+        "F Minor",
+        "C Major"
+    ],
+    answer: "G Minor"
+},
+
+{
+    question: "Identify this chord.",
+    audio: "audio/F Minor.m4a",
+    choices: [
+        "F Major",
+        "F Minor",
+        "C Minor",
+        "G Major"
+    ],
+    answer: "F Minor"
+},
+
+{
+    question: "Identify this chord.",
+    audio: "audio/C# Minor.m4a",
+    choices: [
+        "C# Minor",
+        "C Minor",
+        "F Minor",
+        "G Minor"
+    ],
+    answer: "C# Minor"
+},
+
+{
+    question: "Identify this power chord.",
+    audio: "audio/E5.m4a",
+    choices: [
+        "E5",
+        "D5",
+        "B5",
+        "C5"
+    ],
+    answer: "E5"
+},
+
+{
+    question: "Identify this power chord.",
+    audio: "audio/D5.m4a",
+    choices: [
+        "E5",
+        "D5",
+        "C5",
+        "A5"
+    ],
+    answer: "D5"
+},
+
+{
+    question: "Identify this power chord.",
+    audio: "audio/B5.m4a",
+    choices: [
+        "B5",
+        "A5",
+        "C5",
+        "E5"
+    ],
+    answer: "B5"
+},
+
+{
+    question: "Identify this power chord.",
+    audio: "audio/C5.m4a",
+    choices: [
+        "A5",
+        "B5",
+        "C5",
+        "D5"
+    ],
+    answer: "C5"
+}
+
+];
+
+/* VARIABLES */
+
+let quiz = easyQuiz;
+
+let currentQuestion = 0;
+
+let score = 0;
+
+let selectedAnswer = "";
+
+/* ELEMENTS */
+
+const question =
+document.getElementById(
+"question"
+);
+
+const audioPlayer =
+document.getElementById(
+"audioPlayer"
+);
+
+const options =
+document.getElementById(
+"options"
+);
+
+const progressText =
+document.getElementById(
+"progressText"
+);
+
+const progressBar =
+document.getElementById(
+"progressBar"
+);
+
+/* MODE */
+
+function setMode(mode){
+
+    if(mode === "easy"){
+
+        quiz = easyQuiz;
+
+    } else {
+
+        quiz = hardQuiz;
+    }
+
+    currentQuestion = 0;
+
+    score = 0;
+
+    selectedAnswer = "";
+
+    loadQuestion();
+}
+
+/* LOAD QUESTION */
+
+function loadQuestion(){
+
+    const q =
+    quiz[currentQuestion];
+
+    question.textContent =
+    q.question;
+
+    audioPlayer.innerHTML = `
+    <source src="${q.audio}"
+    type="audio/m4a">
+    `;
+
+    audioPlayer.load();
+
+    options.innerHTML = "";
+
+    q.choices.forEach(choice => {
+
+        const div =
+        document.createElement(
+        "div"
+        );
+
+        div.classList.add(
+        "option"
+        );
+
+        div.textContent =
+        choice;
+
+        div.onclick = () => {
+
+            document
+            .querySelectorAll(".option")
+            .forEach(opt =>
+            opt.classList.remove(
+            "selected"
+            ));
+
+            div.classList.add(
+            "selected"
+            );
+
+            selectedAnswer =
+            choice;
+        };
+
+        options.appendChild(div);
+
+    });
+
+    let progress =
+    (currentQuestion
+    / quiz.length) * 100;
+
+    progressBar.style.width =
+    progress + "%";
+
+    progressText.textContent =
+    "Progress - " +
+    Math.round(progress)
+    + "%";
+}
+
+/* SUBMIT */
+
+function submitAnswer(){
+
+    if(selectedAnswer === ""){
+
+        alert(
+        "Please select an answer."
+        );
+
+        return;
+    }
+
+    if(
+    selectedAnswer ===
+    quiz[currentQuestion].answer
+    ){
+
+        score++;
+    }
+
+    currentQuestion++;
+
+    selectedAnswer = "";
+
+    if(
+    currentQuestion <
+    quiz.length
+    ){
+
+        loadQuestion();
+
+    } else {
+
+        finishQuiz();
+    }
+}
+
+/* FINISH */
+
+function finishQuiz(){
+
+    let resultMessage = "";
+
+    if(score >= quiz.length * 0.8){
+
+        resultMessage =
+        "Excellent ear training!";
+
+    }
+    else if(score >= quiz.length * 0.5){
+
+        resultMessage =
+        "Good job! Keep practicing.";
+
+    }
+    else{
+
+        resultMessage =
+        "Keep training your ears and try again!";
+    }
+
+    document.getElementById(
+    "testBox"
+    ).innerHTML = `
+
+    <div class="result-box">
+
+        <h1>
+            Tone Test Completed!
+        </h1>
+
+        <h2>
+            Your Score:
+            ${score} / ${quiz.length}
+        </h2>
+
+        <p style="margin-top:15px;">
+            ${resultMessage}
+        </p>
+
+        <button
+        class="submit-btn"
+        onclick="location.reload()">
+
+            Try Again
+
+        </button>
+
+    </div>
+
+    `;
+}
+
+</script>
+
+</body>
+</html>

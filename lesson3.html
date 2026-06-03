@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Guitar Chords</title>
+
+<style>
+
+/* RESET */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+/* COLORS */
+
+:root{
+
+    --bg:#0a0a0a;
+    --sidebar:#111;
+    --card:#161616;
+    --text:white;
+
+    --accent:#1aff66;
+    --border:#1aff66;
+}
+
+body.light-mode{
+
+    --bg:#d2a06a;
+    --sidebar:#c38d5b;
+    --card:#efdcc6;
+    --text:#4b2d16;
+
+    --accent:#7a431d;
+    --border:#7a431d;
+}
+
+/* BODY */
+
+body{
+
+    display:flex;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    min-height:100vh;
+
+    transition:0.4s;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+
+    width:230px;
+
+    background:var(--sidebar);
+
+    border-right:2px solid var(--border);
+
+    padding:20px;
+
+    transition:0.4s;
+}
+
+.logo{
+
+    text-align:center;
+
+    margin-bottom:40px;
+}
+
+.logo img{
+
+    width:120px;
+
+    transition:0.4s;
+}
+
+.menu{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+}
+
+.menu a{
+
+    color:var(--text);
+
+    text-decoration:none;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    transition:0.3s;
+
+    font-weight:bold;
+}
+
+.menu a:hover{
+
+    background:var(--accent);
+
+    color:black;
+}
+
+body.light-mode .menu a:hover{
+
+    color:white;
+}
+
+.active{
+
+    background:var(--accent);
+
+    color:black !important;
+}
+
+body.light-mode .active{
+
+    color:white !important;
+}
+
+/* MAIN */
+
+.main{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    padding:40px;
+}
+
+/* TOP BAR */
+
+.top-bar{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:40px;
+}
+
+/* TITLE */
+
+.lesson-title{
+
+    color:var(--accent);
+
+    font-size:50px;
+
+    transition:0.4s;
+}
+
+/* THEME BUTTON */
+
+.theme-btn{
+
+    padding:12px 22px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:var(--accent);
+
+    color:black;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    font-size:15px;
+}
+
+.theme-btn:hover{
+
+    transform:scale(1.05);
+}
+
+body.light-mode .theme-btn{
+
+    color:white;
+}
+
+/* LESSON TEXT */
+
+.lesson-text{
+
+    width:100%;
+
+    max-width:950px;
+
+    background:var(--card);
+
+    border:2px solid var(--border);
+
+    border-radius:25px;
+
+    padding:35px;
+
+    margin-bottom:35px;
+
+    line-height:1.9;
+
+    font-size:20px;
+
+    transition:0.4s;
+}
+
+.lesson-text h2{
+
+    color:var(--accent);
+
+    margin-bottom:20px;
+
+    font-size:38px;
+}
+
+.lesson-text h3{
+
+    color:var(--accent);
+
+    margin-top:25px;
+
+    margin-bottom:15px;
+
+    font-size:30px;
+}
+
+.lesson-text p{
+
+    margin-bottom:20px;
+}
+
+/* IMAGE */
+
+.lesson-image{
+
+    width:420px;
+
+    max-width:90%;
+
+    border-radius:25px;
+
+    border:2px solid var(--border);
+
+    box-shadow:0 0 20px var(--accent);
+
+    margin-bottom:45px;
+
+    transition:0.4s;
+
+    background:var(--card);
+
+    padding:15px;
+}
+
+/* AUDIO SECTION */
+
+.audio-section{
+
+    width:100%;
+
+    max-width:1100px;
+
+    margin-top:40px;
+
+    background:var(--card);
+
+    border:2px solid var(--border);
+
+    border-radius:30px;
+
+    padding:40px;
+}
+
+.audio-section h2{
+
+    text-align:center;
+
+    color:var(--accent);
+
+    font-size:38px;
+
+    margin-bottom:35px;
+}
+
+/* AUDIO GRID */
+
+.audio-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(320px,1fr));
+
+    gap:25px;
+}
+
+/* AUDIO CARD */
+
+.audio-card{
+
+    background:rgba(255,255,255,0.03);
+
+    border:1px solid var(--border);
+
+    border-radius:20px;
+
+    padding:20px;
+
+    transition:0.3s;
+}
+
+.audio-card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 0 15px var(--accent);
+}
+
+.audio-card h3{
+
+    color:var(--accent);
+
+    margin-bottom:15px;
+
+    font-size:22px;
+}
+
+.audio-card audio{
+
+    width:100%;
+}
+
+.lesson-image{
+    width:400px;
+    max-width:90%;
+    border-radius:25px;
+    border:2px solid #1aff66;
+    box-shadow:0 0 20px #1aff66;
+    margin-bottom:30px;
+    transition:0.3s;
+}
+
+
+
+.parts-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:15px;
+    margin-bottom:30px;
+}
+
+.parts-buttons button{
+    padding:12px 20px;
+    border:none;
+    border-radius:12px;
+    background:#111;
+    color:#1aff66;
+    border:1px solid #1aff66;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.parts-buttons button:hover{
+    background:#1aff66;
+    color:black;
+    box-shadow:0 0 15px #1aff66;
+}
+
+
+.audio-btn{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    border:none;
+    background:#1aff66;
+    color:black;
+    font-size:35px;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 0 20px #1aff66;
+}
+
+.audio-btn:hover{
+    transform:scale(1.08);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    body{
+
+        flex-direction:column;
+    }
+
+    .sidebar{
+
+        width:100%;
+
+        border-right:none;
+
+        border-bottom:2px solid var(--border);
+    }
+
+    .top-bar{
+
+        flex-direction:column;
+
+        gap:20px;
+    }
+
+    .lesson-title{
+
+        font-size:38px;
+
+        text-align:center;
+    }
+
+    .lesson-text{
+
+        font-size:18px;
+    }
+
+    .lesson-image{
+
+        width:100%;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <div class="logo">
+
+        <img src="logo/darkL.png"
+        id="logo">
+
+    </div>
+
+    <div class="menu">
+
+        <a href="dashboard.html">
+            Dashboard
+        </a>
+
+        <a href="lesson.html"
+        class="active">
+            Lessons
+        </a>
+
+        <a href="Quiz.html">
+            Quiz
+        </a>
+
+        <a href="calendar.html">
+            Calendar
+        </a>
+
+        <a href="ToneDeaf.html">
+            Tone Test
+        </a>
+
+    </div>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+    <!-- TOP BAR -->
+
+    <div class="top-bar">
+
+        <h1 class="lesson-title">
+
+         Guitar Chords
+
+        </h1>
+
+        <button class="theme-btn"
+        onclick="toggleTheme()">
+
+            Dark / Light Mode
+
+        </button>
+
+    </div>
+
+    <!-- INTRO -->
+
+    <div class="lesson-text">
+
+       <div class="lesson-text">
+
+    <h2>
+         Guitar Chords
+    </h2>
+
+    <p>
+        A guitar chord is created when multiple notes are played together at the same time. 
+        Unlike a single note, chords produce a fuller and richer sound that helps create the harmony of a song. 
+        Chords are one of the most important foundations of guitar playing because they are used in countless musical styles and songs.
+    </p>
+
+    <p>
+        When playing chords, your fingers press specific frets on different strings while your other hand strums or plucks the strings together. 
+        Each chord creates its own unique mood and emotion.
+    </p>
+
+    <h3>
+         Major Chords
+    </h3>
+
+    <p>
+        Major chords usually sound bright, happy, and uplifting. 
+        They are commonly used in cheerful and energetic music.
+    </p>
+
+    <p>
+        Some of the most popular beginner major chords are:
+    </p>
+
+    <ul>
+
+        <li>C Major</li>
+        <li>A Major</li>
+        <li>G Major</li>
+        <li>E Major</li>
+        <li>D Major</li>
+
+    </ul>
+
+    <h3>
+         Minor Chords
+    </h3>
+
+    <p>
+        Minor chords have a softer, deeper, and more emotional sound. 
+        They are often used in slow, dramatic, or emotional songs.
+    </p>
+
+    <p>
+        Common beginner minor chords include:
+    </p>
+
+    <ul>
+
+        <li>A Minor (Am)</li>
+        <li>D Minor (Dm)</li>
+        <li>E Minor (Em)</li>
+
+    </ul>
+
+    <h3>
+         Basic Chord Finger Placement
+    </h3>
+
+    <h3>
+         A Major
+    </h3>
+
+    <p>
+        <strong>Index Finger (1):</strong> 2nd fret on the G string<br>
+
+        <strong>Middle Finger (2):</strong> 2nd fret on the D string<br>
+
+        <strong>Ring Finger (3):</strong> 2nd fret on the B string<br>
+
+        <strong>Strum:</strong> Bottom 5 strings only
+    </p>
+
+    <p>
+         Major has a bright and cheerful tone that works well in many pop and acoustic songs.
+    </p>
+
+    <h3>
+         G Major
+    </h3>
+
+    <p>
+        <strong>Index Finger (1):</strong> 2nd fret on the A string<br>
+
+        <strong>Middle Finger (2):</strong> 3rd fret on the Low E string<br>
+
+        <strong>Ring Finger (3):</strong> 3rd fret on the B string<br>
+
+        <strong>Pinky Finger (4):</strong> 3rd fret on the High E string<br>
+
+        <strong>Strum:</strong> All 6 strings
+    </p>
+
+    <p>
+        G Major produces a strong and full sound that is commonly heard in rock, pop, and country music.
+    </p>
+
+    <h3>
+         D Major
+    </h3>
+
+    <p>
+        <strong>Index Finger (1):</strong> 2nd fret on the G string<br>
+
+        <strong>Middle Finger (2):</strong> 2nd fret on the High E string<br>
+
+        <strong>Ring Finger (3):</strong> 3rd fret on the B string<br>
+
+        <strong>Strum:</strong> Bottom 4 strings only
+    </p>
+
+    <p>
+        D Major has a bright and clean tone that sounds great in acoustic songs.
+    </p>
+
+    <h3>
+         E Minor
+    </h3>
+
+    <p>
+        <strong>Index Finger (1):</strong> 2nd fret on the A string<br>
+
+        <strong>Middle Finger (2):</strong> 2nd fret on the D string<br>
+
+        <strong>Strum:</strong> All 6 strings
+    </p>
+
+    <p>
+        E Minor is one of the easiest beginner chords and has a calm and emotional sound.
+    </p>
+
+    <h3>
+      Power Chords
+    </h3>
+
+    <p>
+        Power chords, such as E5 or D5, are simplified chords commonly used in rock and electric guitar music. 
+        They create a strong and powerful sound and are easier to play because they use fewer notes than regular chords.
+    </p>
+
+    <p>
+        Examples of power chords include:
+    </p>
+
+    <ul>
+
+        <li>E5</li>
+        <li>D5</li>
+        <li>G5</li>
+        <li>A5</li>
+        <li>B5</li>
+
+    </ul>
+
+    <p>
+        Power chords are commonly used in rock riffs, punk music, and energetic songs because of their bold and heavy sound.
+    </p>
+
+</div>
+
+
+   <h1 class="lesson-title"
+    id="lessonTitle">
+       Chords
+    </h1>
+
+    <img src="ccc/f.png"
+    class="lesson-image"
+    id="lessonImage">
+
+
+    <div class="parts-buttons">
+
+        <button onclick="changePart(
+        'C',
+        'ccc/f.png'
+        )">
+
+            C
+
+        </button>
+
+        <button onclick="changePart(
+        'A',
+        'ccc/g.png'
+        )">
+
+            A
+        </button>
+
+        <button onclick="changePart(
+        'G',
+        'ccc/h.png'
+        )">
+         G
+        </button>
+
+        <button onclick="changePart(
+        'E',
+        'ccc/i.png'
+        )">
+           E
+        </button>
+
+        <button onclick="changePart(
+        'D',
+        'ccc/j.png'
+        )">
+
+          D
+
+        </button>
+
+        <button onclick="changePart(
+        'Am',
+        'ccc/k.png'
+        )">
+            Am
+        </button>
+         <button onclick="changePart(
+        'Dm',
+        'ccc/l.png'
+        )">
+            Dm
+        </button>
+         <button onclick="changePart(
+        'Em',
+        'ccc/m.png'
+        )">
+            Em
+        </button>
+
+       
+    </div>
+
+
+</div>
+
+<div class="audio-section">
+
+    <h2>
+         Chord Recordings Library
+    </h2>
+
+    <div class="audio-grid">
+
+        <div class="audio-card">
+
+            <h3>
+                C Major
+            </h3>
+
+            <audio controls>
+
+                <source
+                src="audio/C Major.m4a"
+                type="audio/mp4">
+
+            </audio>
+
+        </div>
+
+        <div class="audio-card">
+
+            <h3>
+                G Major
+            </h3>
+
+            <audio controls>
+
+                <source
+                src="audio/G Major.m4a"
+                type="audio/mp4">
+
+            </audio>
+
+        </div>
+
+        <div class="audio-card">
+
+            <h3>
+                F Major
+            </h3>
+
+            <audio controls>
+
+                <source
+                src="audio/F Major.m4a"
+                type="audio/mp4">
+
+            </audio>
+
+        </div>
+
+        <div class="audio-card">
+
+            <h3>
+                C Minor
+            </h3>
+
+            <audio controls>
+
+                <source
+                src="audio/C Minor.m4a"
+                type="audio/mp4">
+
+            </audio>
+
+        </div>
+
+        <div class="audio-card">
+
+            <h3>
+                G Minor
+            </h3>
+
+            <audio controls>
+
+                <source
+                src="audio/G Minor.m4a"
+                type="audio/mp4">
+
+            </audio>
+
+        </div>
+
+        <div class="audio-card">
+
+            <h3>
+                F Minor
+            </h3>
+
+            <audio controls>
+
+                <source
+                src="audio/F Minor.m4a"
+                type="audio/mp4">
+
+            </audio>
+
+        </div>
+
+        <div class="audio-card">
+
+            <h3>
+                C# Minor
+            </h3>
+
+            <audio controls>
+
+                <source
+                src="audio/C# Minor.m4a"
+                type="audio/mp4">
+
+            </audio>
+
+        </div>
+
+        <div class="audio-card">
+
+            <h3>
+                E5
+            </h3>
+
+            <audio controls>
+
+                <source
+                src="audio/E5.m4a"
+                type="audio/mp4">
+
+            </audio>
+
+        </div>
+
+        <div class="audio-card">
+
+            <h3>
+                D5
+            </h3>
+
+            <audio controls>
+
+                <source
+                src="audio/D5.m4a"
+                type="audio/mp4">
+
+            </audio>
+
+        </div>
+
+        <div class="audio-card">
+
+            <h3>
+                B5
+            </h3>
+
+            <audio controls>
+
+                <source
+                src="audio/B5.m4a"
+                type="audio/mp4">
+
+            </audio>
+
+        </div>
+
+        <div class="audio-card">
+
+            <h3>
+                C5
+            </h3>
+
+            <audio controls>
+
+                <source
+                src="audio/C5.m4a"
+                type="audio/mp4">
+
+            </audio>
+
+        </div>
+
+        <div class="audio-card">
+
+            <h3>
+                A5
+            </h3>
+
+            <audio controls>
+
+                <source
+                src="audio/A5.m4a"
+                type="audio/mp4">
+
+            </audio>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+/* THEME */
+
+function toggleTheme(){
+
+    document.body.classList.toggle(
+    "light-mode"
+    );
+
+    const logo =
+    document.getElementById(
+    "logo"
+    );
+
+    if(
+    document.body.classList.contains(
+    "light-mode"
+    )
+    ){
+
+        logo.src =
+        "logo/lightL.png";
+
+        localStorage.setItem(
+        "theme",
+        "light"
+        );
+
+    } else {
+
+        logo.src =
+        "logo/darkL.png";
+
+        localStorage.setItem(
+        "theme",
+        "dark"
+        );
+    }
+}
+
+/* SAVE THEME */
+
+const savedTheme =
+localStorage.getItem(
+"theme"
+);
+
+if(savedTheme === "light"){
+
+    document.body.classList.add(
+    "light-mode"
+    );
+
+    document.getElementById(
+    "logo"
+    ).src =
+    "logo/lightL.png";
+}
+function changePart(title,image){
+
+    document.getElementById(
+    "lessonTitle"
+    ).textContent = title;
+
+    document.getElementById(
+    "lessonImage"
+    ).src = image;
+
+}
+</script>
+
+</body>
+</html>
